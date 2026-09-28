@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search Console API: lấy clicks, impressions, CTR và vị trí từ khóa</title>
+<meta name="description" content="Hướng dẫn Search Console API (searchanalytics.query) để lấy clicks, impressions, CTR, vị trí trung bình theo từ khóa và trang.">
+<link rel="canonical" href="https://tuannha0312.github.io/search-console-api.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- GA4_TAG -->
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="index.html">Ghi chú SEO &amp; Dữ liệu</a>
+<nav><a href="index.html">Bài viết</a><a href="gioi-thieu.html">Giới thiệu</a></nav>
+</div></header>
+<main><div class="wrap">
+<h1>Search Console API: lấy clicks, impressions, CTR và vị trí từ khóa</h1>
+<p class="meta">Tuấn Nhã · 28/09/2026</p>
+<p>Nếu GA4 cho biết người dùng làm gì <em>sau khi</em> vào website, thì <strong>Google Search Console</strong> cho biết chuyện xảy ra <em>trước đó</em>: website hiện ra trên Google bao nhiêu lần, với từ khóa nào, ở vị trí nào và được nhấp bao nhiêu lần.</p>
+<h2>Bốn chỉ số chính</h2>
+<div class="table-wrap"><table>
+<tr><th>Chỉ số</th><th>Ý nghĩa</th></tr>
+<tr><td>Impressions</td><td>Số lần website xuất hiện trong kết quả tìm kiếm</td></tr>
+<tr><td>Clicks</td><td>Số lần người dùng nhấp vào kết quả để vào website</td></tr>
+<tr><td>CTR</td><td>Clicks chia cho impressions, trả về dạng số thập phân (0,05 nghĩa là 5%)</td></tr>
+<tr><td>Position</td><td>Vị trí trung bình trên trang kết quả, số càng nhỏ càng tốt</td></tr>
+</table></div>
+<h2>Phương thức searchanalytics.query</h2>
+<p>API nhận địa chỉ website (dạng <code>https://ten-mien/</code> hoặc <code>sc-domain:ten-mien</code>), khoảng ngày và các dimension như <code>date</code>, <code>query</code>, <code>page</code>, <code>country</code>, <code>device</code>. Mỗi lần gọi trả tối đa 25.000 dòng, nên dữ liệu lớn phải phân trang bằng tham số <code>startRow</code>.</p>
+<pre><code>{
+  "startDate": "2026-09-01",
+  "endDate":   "2026-09-28",
+  "dimensions": ["query"],
+  "rowLimit": 25000
+}</code></pre>
+<h2>Những điều dễ nhầm</h2>
+<p>Dữ liệu Search Console thường trễ khoảng 2 đến 3 ngày. Khi gộp nhiều dòng, vị trí trung bình phải tính <strong>có trọng số theo impressions</strong>, không cộng rồi chia đều. Một số từ khóa hiếm bị Google ẩn vì quyền riêng tư, nên tổng clicks theo từ khóa có thể nhỏ hơn tổng clicks của cả website. Search Console chỉ giữ khoảng 16 tháng dữ liệu, muốn lưu lâu hơn thì phải tự tải về và cất giữ.</p>
+<p>Clicks của Search Console và sessions của GA4 được đo theo hai cách khác nhau nên không bao giờ khớp tuyệt đối. Nên xem chúng là hai góc nhìn bổ sung cho nhau.</p>
+<p>Bài liên quan: <a href="ga4-data-api-la-gi.html">GA4 Data API</a>, <a href="kpi-seo-can-theo-doi.html">KPI SEO</a>.</p>
+</div></main>
+<footer><div class="wrap">Ghi chú học tập của Tuấn Nhã, sinh viên Công nghệ Thông tin.</div></footer>
+</body>
+</html>
